@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import MaterialTable from 'material-table';
 import MOCK_DATA from '../MOCK_DATA.json';
+import GetAppIcon from '@material-ui/icons/GetApp';
 
 export default function StudentInformationTable() {
   const [tableData, setTableData] = useState(MOCK_DATA);
@@ -35,32 +36,9 @@ export default function StudentInformationTable() {
       title='Student Information'
       columns={columns}
       data={tableData}
-      editable={{
-        onRowAddCancelled: rowData => console.log('Row adding cancelled'),
-        onRowUpdateCancelled: rowData => console.log('Row editing cancelled'),
-        onRowAdd: newRow =>
-          new Promise((resolve, reject) => {
-            setTableData([...tableData, newRow]);
-            setTimeout(() => resolve(), 500);
-          }),
-        onRowUpdate: (newRow, oldRow) =>
-          new Promise((resolve, reject) => {
-            const updatedData = [...tableData];
-            updatedData[oldRow.tableData.id] = newRow;
-            setTableData(updatedData);
-            setTimeout(() => resolve(), 500);
-          }),
-        onRowDelete: selectedRow =>
-          new Promise((resolve, reject) => {
-            const updatedData = [...tableData];
-            updatedData.splice(selectedRow.tableData.id, 1);
-            setTableData(updatedData);
-            setTimeout(() => resolve(), 500);
-          }),
-      }}
       options={{
-        addRowPosition: 'first',
-        actionsColumnIndex: -1,
+        selection: true,
+        selectionProps: { color: 'primary' },
       }}
     />
   );
