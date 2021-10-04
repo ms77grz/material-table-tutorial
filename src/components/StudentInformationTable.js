@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import MaterialTable from 'material-table';
 import MOCK_DATA from '../MOCK_DATA.json';
-import GetAppIcon from '@material-ui/icons/GetApp';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 export default function StudentInformationTable() {
   const [tableData, setTableData] = useState(MOCK_DATA);
 
   const columns = [
-    { title: 'ID', field: 'id' },
+    {
+      title: 'ID',
+      field: 'id',
+    },
     {
       title: 'First Name',
       field: 'first_name',
@@ -20,8 +23,15 @@ export default function StudentInformationTable() {
       align: 'center',
       emptyValue: () => <em>null</em>,
     },
-    { title: 'Age', field: 'age' },
-    { title: 'Gender', field: 'gender', lookup: { M: 'Male', F: 'Female' } },
+    {
+      title: 'Age',
+      field: 'age',
+    },
+    {
+      title: 'Gender',
+      field: 'gender',
+      lookup: { M: 'Male', F: 'Female' },
+    },
     { title: 'City', field: 'city' },
     {
       title: 'School Fee',
@@ -37,9 +47,12 @@ export default function StudentInformationTable() {
       columns={columns}
       data={tableData}
       options={{
+        exportButton: true,
+        grouping: true,
         selection: true,
-        selectionProps: { color: 'primary' },
+        columnsButton: true,
       }}
+      icons={{ Export: () => <CloudUploadIcon /> }}
     />
   );
 }
